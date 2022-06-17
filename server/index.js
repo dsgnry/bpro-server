@@ -14,15 +14,15 @@ const app = express();
 const whitelist = process.env.whitelist_url.split(',');
 
 const corsOptions = {
-  origin: function (origin, callback) {
+  // origin: function (origin, callback) {
     // callback(null, true);
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  // origin: '*',
+  //   if (!origin || whitelist.indexOf(origin) !== -1) {
+  //     callback(null, true);
+  //   } else {
+  //     callback(new Error("Not allowed by CORS"));
+  //   }
+  // },
+  origin: '*',
   methods: "GET,PUT,POST,DELETE",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   credentials: true,
