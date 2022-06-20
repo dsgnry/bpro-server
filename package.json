@@ -9,8 +9,8 @@
     "dev": "cross-env NODE_ENV=development npm run start:watch",
     "start:prod": "cross-env NODE_ENV=production npm run start:watch",
     "start:staging": "cross-env NODE_ENV=staging npm run start:watch",
-    "start:dev": "cross-env NODE_ENV=development nodemon ./server/index.js",
-    "start:watch": "nodemon ./server/index.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon ./server/server.js",
+    "start:watch": "nodemon ./server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
