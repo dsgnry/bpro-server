@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export function uploadMiddleware() {
     const fileStorageEngine = multer.diskStorage({
-      destination: process.env.UPLOADED_FILES_PATH,
+      destination: './uploads',
       filename: (req, file, cb) => {
           const filename = path.parse(file.originalname).name.replace(/\s/g, '') + uuidv4();
           const extension = path.parse(file.originalname).ext;
@@ -16,7 +16,7 @@ export function uploadMiddleware() {
 
 export function uploadNotifiactionMiddleware() {
     const fileStorageEngine = multer.diskStorage({
-      destination: process.env.UPLOADED_NOTIFICATION_PATH,
+      destination: './notifications',
       filename: (req, file, cb) => {
           const filename = path.parse(file.originalname).name.replace(/\s/g, '') + uuidv4();
           const extension = path.parse(file.originalname).ext;

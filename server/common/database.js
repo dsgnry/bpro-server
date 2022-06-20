@@ -2,12 +2,11 @@ import logger from "./loggerService.js";
 import mysql from "mysql";
 
 var connection = mysql.createConnection({
-	host: process.env.HOST,
-	user: process.env.USER,
-	password: process.env.PASSWORD,
-	database: process.env.DATBASE
+	host: 'admin.ccrd3phrsxrc.us-west-2.rds.amazonaws.com',
+	user: 'mysqlserver',
+	password: 'D#vils)WN',
+	database: 'sid1'
 });
-
 
 export function withConnection() {
 	return new Promise((resolve, reject) => {

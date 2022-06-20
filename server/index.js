@@ -11,7 +11,7 @@ import logger from "./common/loggerService.js";
 import api from "./api/router.js";
 
 const app = express();
-const whitelist = process.env.whitelist_url.split(',');
+const whitelist = 'http://localhost:4200,'.split(',');
 
 const corsOptions = {
   // origin: function (origin, callback) {
@@ -31,14 +31,14 @@ const corsOptions = {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.normalize(__dirname + "/..");
-app.use(express.json({ limit: process.env.REQUEST_LIMIT || "100kb" }));
+app.use(express.json({ limit: "100kb" }));
 app.use(
   express.urlencoded({
     extended: true,
-    limit: process.env.REQUEST_LIMIT || "100kb",
+    limit: "100kb",
   })
 );
-app.use(express.text({ limit: process.env.REQUEST_LIMIT || "100kb" }));
+app.use(express.text({ limit: "100kb" }));
 app.use(
   cookieParser("", {
     maxAge: 60 * 60 * 24 * 14 * 1000,
@@ -50,12 +50,11 @@ app.use(cors(corsOptions));
 
 app.use('/api', api);
 
-const PORT = process.env.PORT || 9000;
+const PORT = 9000;
 
 const welcome = (p) => () =>
   logger.info(
-    `up and running in ${
-      process.env.NODE_ENV || "development"
+    `up and running in ${ "development"
     } @: ${os.hostname()} on port: ${p}}`
   );
 
