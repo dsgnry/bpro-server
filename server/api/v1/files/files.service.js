@@ -17,7 +17,29 @@ export class FilesService {
         }
 
         connection.query('SELECT * FROM egypt', function (err, result, fields) {
-          if (err) throw err;
+          if (err) return reject(err);
+          return resolve(result);
+        });
+
+      } catch (err) {
+        return reject(err);
+      }
+    })
+  }
+
+  async filterFiles(
+    filter
+  ) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const connection = await withConnection();
+
+        if (!connection) {
+          return reject({ code: 501, message: "server connection error" });
+        }
+
+        connection.query(`SELECT * FROM egypt where OEM='${filter}'`, function (err, result, fields) {
+          if (err) return reject(err);
           return resolve(result);
         });
 
@@ -39,7 +61,7 @@ export class FilesService {
         let fileSql = `insert into last_excel_file (name, size, type) values ('${file.originalname}', '${file.size}', '${file.mimetype}')`;
 
         connection.query(fileSql, (err, result) => {
-          if (err) throw err;
+          if (err) return reject(err);
           console.log(result);
         })
 
@@ -53,7 +75,7 @@ export class FilesService {
           let sql = `insert into egypt (IPC, OEM, Model, Size, LISS, PATTERN, AXLE, MARKINGS, TECHNOLOGIES, SHARE) values ('${data.IPC}', '${data.OEM}', '${data.Model}', '${data.Size}', '${data.LISS}', '${data.PATTERN}', '${data.AXLE}', '${data.MARKINGS}', '${data.TECHNOLOGIES}', '${data.SHARE}')`;
 
           connection.query(sql, (err, result) => {
-            if (err) throw err;
+            if (err) return reject(err);
             console.log(result);
           })
         });
@@ -76,7 +98,7 @@ export class FilesService {
           }
   
           connection.query('SELECT * FROM last_excel_file', function (err, result) {
-            if (err) throw err;
+            if (err) return reject(err);
             return resolve(result);
           });
   

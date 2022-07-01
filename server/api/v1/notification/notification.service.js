@@ -16,7 +16,7 @@ export class NotificationService {
         let sql = `select * from notification`;
 
         connection.query(sql, (err, result) => {
-          if (err) throw err;
+          if (err) return reject(err);
           return resolve(result);
         })
 
@@ -40,7 +40,7 @@ export class NotificationService {
         let sql = `insert into notification (title, image_source, type) values ('${body.title}', '${filePath}', '${type}')`;
 
         connection.query(sql, (err, result) => {
-          if (err) throw err;
+          if (err) return reject(err);
           return resolve(result);
         })
 
