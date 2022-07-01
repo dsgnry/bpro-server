@@ -21,7 +21,6 @@ export class Controller extends BaseController {
   async filterFilesList(req, res) {
     try {
       const { OEM } = req.query;
-      console.log(OEM);
       const response = await FilesService.filterFiles(OEM);
       super.response(res, response, 200, "");
     }
