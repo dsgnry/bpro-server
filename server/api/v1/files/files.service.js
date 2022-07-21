@@ -29,7 +29,13 @@ export class FilesService {
         if (!connection) {
           return reject({ code: 501, message: "server connection error" });
         }
-        connection.query(`SELECT * FROM egypt where OEM='${filter}'`, function (err, result, fields) {
+        let query = '';
+        if(!filter) {
+          query = 'SELECT * FROM egypt';
+        } else {
+          query = `SELECT * FROM egypt where OEM='${filter}'`;
+        }
+        connection.query(query, function (err, result, fields) {
           if (err) return reject(err);
           return resolve(result);
         });
